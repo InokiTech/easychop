@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Darryldecode\Cart\Cart;
 use App\Product;
 use Illuminate\Support\Str;
+use Jenssegers\Agent\Agent;
 
 class CartController extends Controller
 {
@@ -40,9 +41,33 @@ class CartController extends Controller
     public function index()
     {
         $items =\Cart::session(auth()->id())->getContent();
-        return view('frontend.cart',[
-            'items' => $items,
-        ]);
+
+        // dd(\Cart::getSubTotalWithoutConditions());
+        // dd();
+
+        $subtotal = \Cart::session(auth()->id())->getSubTotal();
+        $totalcount = \Cart::session(auth()->id())->getTotal();
+
+        //dd();
+
+
+        $agent = new Agent();
+        if ($agent->isMobile()) {
+
+            return view('frontend.mobile.cart',[
+                'items' => $items,
+                'subtotal' =>$subtotal,
+                'total'=> $totalcount,
+                 ]);
+
+        }else{
+
+            return view('frontend.cart',[
+                   'items' => $items,
+                    ]);
+        }
+
+
     }
 
     public function update(Request $request, $item)
@@ -75,10 +100,10 @@ class CartController extends Controller
 
     public function returnCartCount(){
 
-        $count = \Cart::session(auth()->id())->getContent()->count();
-        
-       
-        
+        // $count = \Cart::session(auth()->id())->getContent()->count();
+
+        $count = \Cart::session(auth()->id())->getTotalQuantity();
+
          return response()->json([
                 'count' => $count,
                 'msg' => 'Added to cart'

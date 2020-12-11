@@ -33,6 +33,7 @@ class LoginController extends Controller
      *
      * @var string
      */
+
     protected $redirectTo = '/';
 
     /**
@@ -52,6 +53,8 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
+
+
     /**
      * Validate the user login request.
      *
@@ -63,12 +66,12 @@ class LoginController extends Controller
     protected function validateLogin(Request $request)
     {
         // ReCaptcha Validation
-        if(setting('captcha')){
-          return $request->validate([
-                    'email' => 'required|email',
-                    'password' => 'required|string',
-                    'g-recaptcha-response' => 'required|captcha',
-                ]);
+        if (setting('captcha')) {
+            return $request->validate([
+                'email' => 'required|email',
+                'password' => 'required|string',
+                'g-recaptcha-response' => 'required|captcha',
+            ]);
         }
 
         return $request->validate([
@@ -80,18 +83,17 @@ class LoginController extends Controller
     public function showLoginForm()
     {
         $agent = new Agent();
-        if( $agent->isMobile()){
+
+        if ($agent->isMobile()) {
             return view('frontend.mobile.login');
-        }else{
+        } else {
             return view('frontend.auth.login');
         }
-       
-       
     }
 
     public function authenticated(Request $request, $user)
     {
-        if(!$user->hasRole('customers')){
+        if (!$user->hasRole('customers')) {
             Auth::logout();
             alert()->error('This login panel is for Customers')->persistent('close');
             return back();
@@ -105,8 +107,8 @@ class LoginController extends Controller
      */
     public function logout(Request $request)
     {
-    	Google2FA::logout();
-    	Auth::logout();
+        Google2FA::logout();
+        Auth::logout();
         return redirect('/');
     }
 
@@ -156,9 +158,9 @@ class LoginController extends Controller
 
             /* Logging of activity of sign-up*/
             activity()->performedOn($authUser)
-            ->withProperties(['name' => ($authUser->username) ? $authUser->username : $authUser->email, 'by' => $authUser->fullname])
-            ->causedBy($authUser)
-            ->log('Account accessed with ' . $provider);
+                ->withProperties(['name' => ($authUser->username) ? $authUser->username : $authUser->email, 'by' => $authUser->fullname])
+                ->causedBy($authUser)
+                ->log('Account accessed with ' . $provider);
             /* Logging of activity of sign-up*/
         }
         return $authUser;
@@ -240,5 +242,4 @@ class LoginController extends Controller
     }
 
     /***************************SOCIALITE*****************************/
-
 }
