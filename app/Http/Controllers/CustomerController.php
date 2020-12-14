@@ -7,7 +7,7 @@ use App\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
-
+use Jenssegers\Agent\Agent;
 class CustomerController extends Controller
 {
     use AuthenticatesUsers;
@@ -95,7 +95,15 @@ class CustomerController extends Controller
 
     public function profileCustomer()
     {
-        return view('frontend.customer.profile');
+
+        $agent = new Agent();
+        if ($agent->isMobile()){
+            return view('frontend.mobile.profile');
+        }else{
+            return view('frontend.customer.profile');
+        }
+
+
     }
 
     public function updateProfileCustomer(Request $request, User $user)
@@ -118,12 +126,27 @@ class CustomerController extends Controller
             'phone' => $request->phone,
         ])->save();
 
+        $agent = new Agent();
+        if ($agent->isMobile()){
+
+            if($status){
+                return response()->json([
+                    'msg' => 'updated successfully',
+                ]);
+            }else{
+                return response()->json([
+                    'msgErr' => 'Oops! There was an error when trying to updated customer profile. Please try again',
+                ]);
+            }
+        }else{
+
         if($status){
             return back()->with('success','Customer profile updated successfully');
         }else{
             alert()->error('Oops! There was an error when trying to updated customer profile. Please try again');
             return back();
         }
+    }
 
 
     }

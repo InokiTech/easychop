@@ -41,14 +41,8 @@ class CartController extends Controller
     public function index()
     {
         $items =\Cart::session(auth()->id())->getContent();
-
-        // dd(\Cart::getSubTotalWithoutConditions());
-        // dd();
-
         $subtotal = \Cart::session(auth()->id())->getSubTotal();
         $totalcount = \Cart::session(auth()->id())->getTotal();
-
-        //dd();
 
 
         $agent = new Agent();
@@ -57,7 +51,7 @@ class CartController extends Controller
             return view('frontend.mobile.cart',[
                 'items' => $items,
                 'subtotal' =>$subtotal,
-                'total'=> $totalcount,
+                'total'=> money($totalcount),
                  ]);
 
         }else{
@@ -76,6 +70,11 @@ class CartController extends Controller
             'quantity' => 'required|numeric|gt:0',
         ]);
 
+
+        // $subtotal = \Cart::session(auth()->id())->getSubTotal();
+        // $totalcount = \Cart::session(auth()->id())->getTotal();
+        // $unitprice = \Cart::session(auth()->id())->get($item->id)->getPriceSum();
+
         \Cart::session(auth()->id())->update($item, array(
             'quantity' => array(
                 'relative' => false,
@@ -83,7 +82,21 @@ class CartController extends Controller
             ))
         );
 
-        return back();
+        $agent = new Agent();
+        if ($agent->isMobile()) {
+
+            // return response()->json([
+            //     'msg' => 'Removed',
+            //     'subtotal' => $subtotal,
+            //     'total'=> $totalcount,
+            //     'price' => $unitprice
+            //     ]);
+            return back();
+
+        }else{
+             return back();
+        }
+
 
     }
 

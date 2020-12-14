@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
+use Jenssegers\Agent\Agent;
 
 class ForgotPasswordController extends Controller
 {
@@ -27,6 +28,12 @@ class ForgotPasswordController extends Controller
      */
     public function showLinkRequestForm()
     {
-        return view('frontend.auth.forgot-password');
+        $agent = new Agent();
+        if ($agent->isMobile()) {
+            return view('frontend.mobile.forgotPassword');
+        }else{
+            return view('frontend.auth.forgot-password');
+        }
+
     }
 }

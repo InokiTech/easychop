@@ -5,18 +5,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>welcome to Easychop</title>
     <link rel="stylesheet" href="{{asset('front-assets/css/mobile/mobile_style.css')}}">
+    <script src="{{asset('plugins/sweetalert/js/sweetalert.min.js')}}"></script>
+
     <style>
         *{
             font-family: "Open Sans", sans-serif;
         }
     </style>
 @yield('styles')
+@laravelPWA
 </head>
 <body>
 <div class="msg"></div>
+
+ @include('sweet::alert')
 @yield('content')
 @yield('scripts')
-@include('frontend.bottomNav')
+
+    @if (Request::is('order*'))
+
+
+    @else
+
+         @include('frontend.bottomNav')
+    @endif
 
 
 
@@ -28,6 +40,9 @@
 
 
 
+    @if (Request::is('cart'))
+
+    @else
 
 
 <script>
@@ -65,42 +80,47 @@
         let plusBtn = document.querySelector("#plus");
         let minusBtn = document.querySelector("#minus");
 
-
-        //------- if plus is  clicked -------------
-
-        plusBtn.addEventListener("click", ()=>{
-
-            let id = plusBtn.value;
-
-            //add to cart
-            async function addToCart(){
-                let action = await fetch(`/add-to-cart/${id}`);
-                let data = await action.json();
-                return data;
-                }
-
-                //get message after success
-                function addAndGetMessage(){
-                    let res = addToCart().then((result)=>{
-                        let Div = document.querySelector(".msg");
-                        Div.innerHTML= "";
-                        Div.classList.add("msgSuccess");
-
-                        let newContent = document.createTextNode(result.msg);
-                        Div.appendChild(newContent);
-                        setTimeout(() => {
-                        Div.classList.remove("msgSuccess");
-                        Div.innerHTML= "";
-                        }, 1700);
-                        console.log(result);
-                    });
-                }
+            if (plusBtn !== null) {
 
 
-            addAndGetMessage();
-            displayCartCount();
+            //------- if plus is  clicked -------------
 
-        });
+            plusBtn.addEventListener("click", ()=>{
+
+                let id = plusBtn.value;
+
+                //add to cart
+                async function addToCart(){
+                    let action = await fetch(`/add-to-cart/${id}`);
+                    let data = await action.json();
+                    return data;
+                    }
+
+                    //get message after success
+                    function addAndGetMessage(){
+                        let res = addToCart().then((result)=>{
+                            let Div = document.querySelector(".msg");
+                            Div.innerHTML= "";
+                            Div.classList.add("msgSuccess");
+
+                            let newContent = document.createTextNode(result.msg);
+                            Div.appendChild(newContent);
+                            setTimeout(() => {
+                            Div.classList.remove("msgSuccess");
+                            Div.innerHTML= "";
+                            }, 1700);
+                            // console.log(result);
+                        });
+                    }
+
+
+                addAndGetMessage();
+                displayCartCount();
+
+            });
+        }
+
+        if (minusBtn !== null) {
 
 
         //---------- if minus is clicked ---------
@@ -131,7 +151,7 @@
                         Div.classList.remove("msgFail");
                         Div.innerHTML= "";
                         }, 1300);
-                        console.log(result);
+                        // console.log(result);
                     });
                 }
 
@@ -140,12 +160,16 @@
             displayCartCount();
 
 
-        });
+          });
+        }
 
-    })
+    });
 
 
 
 </script>
+
+@endif
+
 </body>
 </html>

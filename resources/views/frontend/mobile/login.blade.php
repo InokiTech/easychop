@@ -10,6 +10,9 @@ html, body{
     padding: 0;
     margin:0;
 }
+body{
+    overflow: hidden;
+}
 
 .bg-img{
     position: absolute;
@@ -23,7 +26,7 @@ html, body{
 }
 
 main {
-     font-family: "Open Sans", sans-serif; 
+     font-family: "Open Sans", sans-serif;
     display: flex;
     height: 100%;
     width: 100%;
@@ -161,7 +164,7 @@ hr{
 
 @section('content')
 
-<main > 
+<main >
 
 <span class="back-btn">
     <a href="{{url('/')}}">
@@ -194,16 +197,16 @@ hr{
                     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" focusable="false" width="1em" height="1em" style="-ms-transform: rotate(360deg); -webkit-transform: rotate(360deg); transform: rotate(360deg);" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><path d="M12 2C9.243 2 7 4.243 7 7v3H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8a2 2 0 0 0-2-2h-1V7c0-2.757-2.243-5-5-5zM9 7c0-1.654 1.346-3 3-3s3 1.346 3 3v3H9V7zm4 10.723V20h-2v-2.277a1.993 1.993 0 0 1 .567-3.677A2.001 2.001 0 0 1 14 16a1.99 1.99 0 0 1-1 1.723z" fill="#626262"/><rect x="0" y="0" width="24" height="24" fill="rgba(0, 0, 0, 0)" /></svg>
                 </span>
             </div>
-        
+
 
             <div class="checkboxes float-left">
                 <div>
                     <input type="checkbox" name="check">
                     <label class="container_check" for="check">Remember me </label>
                 </div>
-                
+
                 <a id="forgot" href="/password/reset">Forgot Password?</a>
-               
+
             </div>
 
 
@@ -212,7 +215,7 @@ hr{
                 <span class="dont-have-an-account">
                      Don’t have an account? <a href="{{url('/register')}}">Sign up</a>
                 </span>
-               
+
             </div>
             <hr/>
             <div class="signin-with">
@@ -224,10 +227,10 @@ hr{
                     <svg xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 48 48" width="35px" height="35px"><path fill="#fbc02d" d="M43.611,20.083H42V20H24v8h11.303c-1.649,4.657-6.08,8-11.303,8c-6.627,0-12-5.373-12-12	s5.373-12,12-12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C12.955,4,4,12.955,4,24s8.955,20,20,20	s20-8.955,20-20C44,22.659,43.862,21.35,43.611,20.083z"/><path fill="#e53935" d="M6.306,14.691l6.571,4.819C14.655,15.108,18.961,12,24,12c3.059,0,5.842,1.154,7.961,3.039	l5.657-5.657C34.046,6.053,29.268,4,24,4C16.318,4,9.656,8.337,6.306,14.691z"/><path fill="#4caf50" d="M24,44c5.166,0,9.86-1.977,13.409-5.192l-6.19-5.238C29.211,35.091,26.715,36,24,36	c-5.202,0-9.619-3.317-11.283-7.946l-6.522,5.025C9.505,39.556,16.227,44,24,44z"/><path fill="#1565c0" d="M43.611,20.083L43.595,20L42,20H24v8h11.303c-0.792,2.237-2.231,4.166-4.087,5.571	c0.001-0.001,0.002-0.001,0.003-0.002l6.19,5.238C36.971,39.205,44,34,44,24C44,22.659,43.862,21.35,43.611,20.083z"/></svg>
                 </a>
             </div>
-            
-        
+
+
         </div>
-      
+
 
 
     </form>

@@ -35,6 +35,7 @@
         "pragmarx/countries": "^0.7.0",
         "pragmarx/google2fa-laravel": "^1.3",
         "rachidlaasri/laravel-installer": "^4.0",
+        "silviolleite/laravelpwa": "^2.0",
         "sirdoro/url-verify": "^1.0",
         "spatie/geocoder": "^3.9",
         "spatie/laravel-activitylog": "^3.9",

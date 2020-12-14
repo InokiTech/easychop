@@ -8,7 +8,7 @@
 	<img src="/front-assets/img/logo.png" alt="">
 </div>
 
-	
+
 
         <div class="hero_single inner_pages background-image" data-background="url('front-assets/img/home_section_1.jpg')">
 		{{-- <div class="hero_single version_2"> --}}
@@ -268,7 +268,7 @@
 						<small>EasyChop Vendors</small>
 						<h3>More than 300 Restaurants</h3>
 						<p class="largescreen-text">
-							On our platform you have increased reach to your customers and the chance of 
+							On our platform you have increased reach to your customers and the chance of
 							creating a new market niche
 							</p>
 						<a href="#0" class="btn_1 home-search-button">Become a Vendor</a> <a href="#0" style="background:#fff!important;color:#ff2000;" class="btn_1 home-search-button rider-btn">Become a Rider</a>
@@ -452,28 +452,28 @@
 							let loaderDiv = document.querySelector(".preloader");
 							loaderDiv.style.left = "0";
 
-							
+
 						}
 
 						function hideLoader(){
 							let loaderDiv = document.querySelector(".preloader");
 							// loaderDiv.style.transition="all 3s ease";
 							loaderDiv.style.left = "-150%";
-								
+
 						}
 
 					if (document.readyState === 'loading') {
 
 						// showLoader();
-						// 
+						//
 
-						console.log("it is");
+						// console.log("it is");
 						document.addEventListener('DOMContentLoaded', hideLoader);
-						
+
 					}else{
 						hideLoader();
 					}
-					
+
 
 
 </script>

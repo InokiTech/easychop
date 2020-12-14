@@ -105,7 +105,6 @@ class HomeController extends Controller
 
     public function search()
     {
-        dd(request());
         $search = request()->detail;
         $query = $this->product->query();
 
@@ -120,6 +119,7 @@ class HomeController extends Controller
             $query->select('shop_address', 'shop_city', 'shop_id', 'shop_name');
         }])->select('shop_id', 'product_id', 'product_image', 'product_name', 'product_price')->get();
 
+        //dd($query_output);
         return $query_output;
     }
 
@@ -147,11 +147,18 @@ class HomeController extends Controller
             $query->where('status', 'active');
         })->get();
 
+        $agent = new Agent();
+        if ($agent->isMobile()) {
+            return view('frontend.mobile.home', [
+                'shops' => $shops,
+            ]);
 
-        return view('frontend.shop-search', [
-            'shops' => $shops,
-            'location' => $search,
+        }else{
+            return view('frontend.shop-search', [
+                'shops' => $shops,
+                'location' => $search,
 
-        ]);
+            ]);
+        }
     }
 }

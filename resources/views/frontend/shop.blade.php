@@ -69,7 +69,7 @@
 									<div class="score"><strong>
 									<button class="btn-cart" style="outline:none" id="plus" value="{{$product->product_id}}" >+</button>
 									<button class="btn-cart" style="outline:none" id="minus" value="{{$product->product_id}}" >-</button>
-								
+
 								</strong></div>
                                 </li>
                             </ul>
@@ -94,40 +94,40 @@
 
 	<script>
 
-				
+
 				document.addEventListener("DOMContentLoaded",()=>{
 
-				
-					
-                 
-                 
+
+
+
+
                  async function getCartCount(){
                         let count = await fetch(`/cart/count`);
                         let data = await count.json();
                         return data
-				 }   
-				 
+				 }
+
 
 
                  function displayCartCount(){
-					
+
 					let count = getCartCount().then(d => {
-					
+
 						let cartCount = document.querySelector("#cart-count");
 						cartCount.innerHTML = d.count;
 					});
 
-					
+
 
                  }
-				
 
-			
+
+
 
 					let plusBtn = document.querySelector("#plus");
 					let minusBtn = document.querySelector("#minus");
-				
-					
+
+
 					//------- if plus is  clicked -------------
 
 					plusBtn.addEventListener("click", ()=>{
@@ -151,14 +151,14 @@
 									let newContent = document.createTextNode(result.msg);
 									Div.appendChild(newContent);
 									setTimeout(() => {
-									Div.classList.remove("msgSuccess");	
+									Div.classList.remove("msgSuccess");
 									Div.innerHTML= "";
 									}, 1700);
-									console.log(result);
+									// console.log(result);
 								});
 							}
 
-						
+
 						addAndGetMessage();
 						displayCartCount();
 
@@ -171,7 +171,7 @@
 
 						let id= minusBtn.value;
 
-						
+
 						////////////////////////
 						//Remove from cart
 						async function removeFromCart(){
@@ -190,14 +190,14 @@
 									let newContent = document.createTextNode(result.msg);
 									Div.appendChild(newContent);
 									setTimeout(() => {
-									Div.classList.remove("msgFail");	
+									Div.classList.remove("msgFail");
 									Div.innerHTML= "";
 									}, 1300);
-									console.log(result);
+									// console.log(result);
 								});
 							}
 
-						
+
 						removeAndGetMessage();
 						displayCartCount();
 
@@ -205,7 +205,7 @@
 					});
 
 				})
-				
+
 
 
 	</script>

@@ -11,6 +11,7 @@
     main{
         font-family: "open sans", sans-serif;
         justify-content: flex-start;
+        /* padding-bottom: 20px; */
     }
 
     .head{
@@ -87,11 +88,11 @@
     div.search-input{
         width: 80%;
         background:#f8f4f5;
-        border: 1px solid #888;
+        border: 1px solid #ddd;
         border-radius: 10px;
         height: 34px;
         display: flex;
-
+        padding: 2px;
     }
 
     div.search-input input{
@@ -120,7 +121,10 @@
 
 .product-list{
     width: 100%;
+    /* height: 100%; */
+    overflow-y: scroll;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     background: #fff;
     border-radius: 34px;

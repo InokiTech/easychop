@@ -7,6 +7,7 @@ use App\Order;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use App\Support\Paystacks;
+use Jenssegers\Agent\Agent;
 
 class OrderController extends Controller
 {
@@ -44,9 +45,17 @@ class OrderController extends Controller
             return redirect('/cart');
         }
         $items = \Cart::session(auth()->id())->getContent();
-        return view('frontend.checkout',[
-            'items' => $items,
-        ]);
+
+        $agent = new Agent();
+        if ($agent->isMobile()) {
+            return view('frontend.mobile.checkout',[
+                'items' => $items,
+            ]);
+        }else{
+            return view('frontend.checkout',[
+                'items' => $items,
+            ]);
+        }
     }
 
     /**

@@ -81,15 +81,16 @@
                 </a>
             </div>
             <!-- /top_menu -->
-            <!-- <a href="#0" class="open_close">
+             {{-- <a href="#0" class="open_close">
                 <i class="icon_menu"></i><span>Menu</span>
-            </a> -->
+            </a> --}}
+            
             @include('frontend.menu')
         </div>
 	</header>
-	
+
 	<!-- /header -->
-	
+
     @include('sweet::alert')
     @yield('content')
 <footer>

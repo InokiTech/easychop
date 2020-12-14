@@ -32,6 +32,8 @@ Route::post('/order/checkout', 'OrderController@store');
 /*============================== Home Route ==================================*/
 
 
+
+
 ##################################### PAYMENT ROUTE ##########################################
 Route::get('/order/payment/{order}', 'OrderController@payment')->name('order.payment');
 Route::post('/order/payment/{order}', 'OrderController@processPayment')->name('order.payment');
@@ -53,3 +55,9 @@ Route::get('/customer/profile', 'CustomerController@profileCustomer');
 Route::post('/customer/profile', 'CustomerController@updateProfileCustomer');
 
 Route::webhooks('paystack-webhook');
+
+
+// =================== PWA ROUTE =================
+Route::get('/offline', function () {
+    return view('modules/laravelpwa/offline');
+    });
